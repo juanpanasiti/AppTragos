@@ -52,8 +52,17 @@ class DrinkDetailsFragment : Fragment() {
         setupFavDrink()
 
         btn_favorito.setOnClickListener {
-            viewModel.saveDrink(DrinkEntity(drink.idDrink, drink.imagen, drink.nombre, drink.descripcion, drink.hasAlcohol))
-            Toast.makeText(requireContext(), "Trago guardado en favoritos", Toast.LENGTH_SHORT).show()
+            if (favDrink?.idDrink.isNullOrEmpty()){
+                //No está en favoritos
+                viewModel.saveDrink(DrinkEntity(drink.idDrink, drink.imagen, drink.nombre, drink.descripcion, drink.hasAlcohol))
+                setupFavDrink()
+                Toast.makeText(requireContext(), "Trago guardado en favoritos", Toast.LENGTH_SHORT).show()
+            } else {
+                //Está en favoritos
+                viewModel.deleteDrink(favDrink!!)
+                setupFavDrink()
+                Toast.makeText(requireContext(), "Trago eliminado de favoritos", Toast.LENGTH_SHORT).show()
+            }
         }
     }//onViewCreated()
 
@@ -63,17 +72,13 @@ class DrinkDetailsFragment : Fragment() {
                 is Resource.Loading -> {}
                 is Resource.Success -> {
                     resFavDrink.data.let {
-                        if(it.toString().isNotEmpty()){
                             favDrink = it
-                        }
-                        Log.d("FAV_DRINK", "$it")
                     }
-                    Toast.makeText(requireContext(), "Es ${favDrink?.nombre}", Toast.LENGTH_SHORT).show()
-                    if (favDrink?.idDrink.equals("")){
+                    if (favDrink?.idDrink.isNullOrEmpty()){
+                        //No está en favoritos
                         btn_favorito.setImageResource(R.drawable.ic_unstar_24)
-                        Toast.makeText(requireContext(), "No es favorito", Toast.LENGTH_SHORT).show()
                     } else {
-                        Toast.makeText(requireContext(), "Es favorito", Toast.LENGTH_SHORT).show()
+                        //Está en favoritos
                         btn_favorito.setImageResource(R.drawable.ic_star_24)
                     }
                 }

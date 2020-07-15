@@ -13,8 +13,8 @@ interface DrinkDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavorite(drink:DrinkEntity)
 
-//    @Delete
-//    suspend fun deleteDrink(drink:Drink)
+    @Delete()
+    suspend fun deleteDrink(drink:DrinkEntity)
 
     @Query("SELECT * FROM drinks WHERE idDrink = :id")
     suspend fun getFavouriteDrinkById(id:String):DrinkEntity
