@@ -1,11 +1,10 @@
 package com.giosoft.apptragos.domain
 
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
+import com.giosoft.apptragos.data.models.Drink
 import com.giosoft.apptragos.data.models.DrinkEntity
 
+@Dao
 interface DrinkDAO {
 
     @Query("SELECT * FROM drinks")
@@ -13,4 +12,10 @@ interface DrinkDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavorite(drink:DrinkEntity)
+
+//    @Delete
+//    suspend fun deleteDrink(drink:Drink)
+
+    @Query("SELECT * FROM drinks WHERE idDrink = :id")
+    suspend fun getFavouriteDrinkById(id:String):DrinkEntity
 }

@@ -10,13 +10,13 @@
     <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/img_drink"
         android:layout_width="match_parent"
-        android:layout_height="300dp"/>
+        android:layout_height="300dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_favorito"
-        android:src="@drawable/ic_star_24"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_unstar_24" />
 
     <TextView
         android:id="@+id/txt_drink_title"
@@ -24,20 +24,20 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Margarita Blue"
-        android:textStyle="bold"
-        android:textSize="25sp"/>
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/txt_has_alcohol"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        tools:text="Sin Alcohol"/>
+        tools:text="Sin Alcohol" />
 
     <TextView
         android:id="@+id/txt_drink_desc"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp" />
 
 </LinearLayout>
